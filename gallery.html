@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Gallery | WAXXES ANIMATION</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-blue': '#00f7ff',
+                        'dark-orange': '#ff5e00',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #00f7ff;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        
+        .btn-hover-effect {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+        }
+        
+        .btn-hover-effect:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+        }
+        
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #00f7ff;
+        }
+        
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.3s;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        
+        .prev {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .prev:hover, .next:hover {
+            color: #00f7ff;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .gallery-item {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        css-doodle.doodle {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        opacity: .04;
+}
+    </style>
+</head>
+<body class="gradient-bg">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-2xl font-bold neon-text">WAXXES<span class="text-orange-500">...</span></a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="index.html#home" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="index.html#work" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">Work</a>
+                        <a href="index.html#about" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">About</a>
+                        <a href="index.html#contact" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white hover:text-neon-blue focus:outline-none">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-black bg-opacity-95">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html#home" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">Home</a>
+                <a href="index.html#work" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">Work</a>
+                <a href="index.html#about" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">About</a>
+                <a href="index.html#contact" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 id="project-title" class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                    <span class="text-white">Project</span> <span class="text-neon-blue">Title</span>
+                </h1>
+                <p id="project-category" class="text-dark-orange font-semibold mb-4">Brand Identity</p>
+                <p id="project-description" class="text-gray-400 max-w-3xl mx-auto">
+                    A detailed description of the project will appear here, explaining the creative process, challenges, and solutions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Gallery -->
+    <section class="pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
+                <!-- Gallery items will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">
+                        <span class="text-white">Project</span> <span class="text-neon-blue">Details</span>
+                    </h2>
+                    <div id="project-details" class="space-y-6">
+                        <!-- Project details will be dynamically inserted here -->
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">
+                        <span class="text-white">Client</span> <span class="text-neon-blue">Testimonial</span>
+                    </h2>
+                    <div id="client-testimonial" class="bg-gray-900 bg-opacity-50 p-8 rounded-xl">
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 bg-gray-800 p-3 rounded-lg">
+                                <i class="fas fa-quote-left text-dark-orange text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p id="testimonial-text" class="text-gray-300 italic mb-4">
+                                    "The designer exceeded our expectations with their creative approach and attention to detail. The final deliverables perfectly captured our brand vision."
+                                </p>
+                                <div>
+                                    <p id="client-name" class="text-white font-semibold">John Smith</p>
+                                    <p id="client-position" class="text-gray-400 text-sm">CEO, Company Name</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Projects -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <span class="text-white">Related</span> <span class="text-neon-blue">Projects</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Explore more of my creative work in similar categories
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="related-projects">
+                <!-- Related projects will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="">
+            <div id="lightbox-caption" class="text-white mt-4 text-center"></div>
+        </div>
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-90 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold neon-text">WAXXES<span class="text-orange-500">...</span></span>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <p class="text-gray-400 mb-4 text-center md:text-right">
+                        © 2023 Graphic Design Portfolio. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-neon-blue">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-neon-blue">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-neon-blue">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-neon-blue">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <css-doodle class="doodle">
+        @grid: 2 / 100vmax / #352c3d;
+        --hue: calc(180 + 1.5 * @x * @y);
+        background: hsl(var(--hue), 50%, 70%, 1.2);
+        margin: -.5px;
+        transition: @r(300ms) ease;
+        clip-path: polygon(@pick(
+        '0 0, 100% 0, 100% 100%',
+        '0 0, 100% 0, 0 100%',
+        '0 0, 100% 100%, 0 100%',
+        '100% 0, 100% 100%, 0 100%'
+        ));
+    </css-doodle>
+    <script src="https://unpkg.com/css-doodle@0.36.0/css-doodle.min.js"></script>
+
+    <script>
+        // Get project ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('project') || '1';
+        
+        // Project data (in a real app, this would come from an API or database)
+        const projects = {
+            '1': {
+                title: 'Brand Identity',
+                category: 'Branding',
+                description: 'Modern logo design and comprehensive brand guidelines for a tech startup looking to establish a strong visual identity in the competitive SaaS market.',
+                images: [
+                    { src: 'Assets/waxxes logo WHITE copy.png', caption: 'Primary logo mark' },
+                    { src: 'https://source.unsplash.com/random/800x600/?brand,guidelines', caption: 'Brand guidelines cover' },
+                    { src: 'https://source.unsplash.com/random/800x600/?stationery,design', caption: 'Business stationery' },
+                    { src: 'https://source.unsplash.com/random/800x600/?brand,application', caption: 'Digital application' },
+                    { src: 'https://source.unsplash.com/random/800x600/?brand,colors', caption: 'Color palette' },
+                    { src: 'https://source.unsplash.com/random/800x600/?typography,design', caption: 'Typography system' }
+                ],
+                details: [
+                    { icon: 'fas fa-user-tie', title: 'Client', value: 'TechStart Inc.' },
+                    { icon: 'fas fa-calendar-alt', title: 'Year', value: '2023' },
+                    { icon: 'fas fa-tags', title: 'Category', value: 'Brand Identity' },
+                    { icon: 'fas fa-clock', title: 'Duration', value: '6 weeks' },
+                    { icon: 'fas fa-palette', title: 'Tools', value: 'Illustrator, Photoshop, InDesign' }
+                ],
+                testimonial: {
+                    text: '"The designer created a brand identity that perfectly captured our innovative spirit while maintaining professional credibility. The guidelines they provided made it easy for our team to maintain consistency across all touchpoints."',
+                    name: 'Sarah Johnson',
+                    position: 'Marketing Director, TechStart Inc.'
+                },
+                related: [
+                    { id: '2', title: 'Event Poster', image: 'https://source.unsplash.com/random/600x400/?poster,design', category: 'Print Design' },
+                    { id: '4', title: 'Digital Illustration', image: 'https://source.unsplash.com/random/600x400/?illustration,digital', category: 'Illustration' },
+                    { id: '6', title: 'Editorial Design', image: 'https://source.unsplash.com/random/600x400/?magazine,layout', category: 'Publication Design' }
+                ]
+            },
+            '2': {
+                title: 'Event Poster',
+                category: 'Print Design',
+                description: 'Vibrant music festival poster series featuring custom typography and illustrations that captured the energy and diversity of the annual event.',
+                images: [
+                    { src: 'https://source.unsplash.com/random/800x600/?music,poster', caption: 'Main festival poster' },
+                    { src: 'https://source.unsplash.com/random/800x600/?concert,flyer', caption: 'Secondary poster variant' },
+                    { src: 'https://source.unsplash.com/random/800x600/?typography,creative', caption: 'Custom typography detail' },
+                    { src: 'https://source.unsplash.com/random/800x600/?illustration,music', caption: 'Illustration close-up' },
+                    { src: 'https://source.unsplash.com/random/800x600/?poster,series', caption: 'Poster series display' },
+                    { src: 'https://source.unsplash.com/random/800x600/?street,poster', caption: 'Outdoor application mockup' }
+                ],
+                details: [
+                    { icon: 'fas fa-user-tie', title: 'Client', value: 'Urban Beats Festival' },
+                    { icon: 'fas fa-calendar-alt', title: 'Year', value: '2022' },
+                    { icon: 'fas fa-tags', title: 'Category', value: 'Print Design' },
+                    { icon: 'fas fa-clock', title: 'Duration', value: '3 weeks' },
+                    { icon: 'fas fa-palette', title: 'Tools', value: 'Illustrator, Photoshop, Procreate' }
+                ],
+                testimonial: {
+                    text: '"The posters were so visually striking that they became collector\'s items! They perfectly captured the eclectic mix of our festival while maintaining strong readability of all event details."',
+                    name: 'Michael Chen',
+                    position: 'Creative Director, Urban Beats'
+                },
+                related: [
+                    { id: '1', title: 'Brand Identity', image: 'https://source.unsplash.com/random/600x400/?logo,design', category: 'Branding' },
+                    { id: '3', title: 'Product Packaging', image: 'https://source.unsplash.com/random/600x400/?packaging,design', category: 'Packaging' },
+                    { id: '5', title: 'Book Cover', image: 'https://source.unsplash.com/random/600x400/?book,cover', category: 'Publication Design' }
+                ]
+            },
+            '3': {
+                title: 'Product Packaging',
+                category: 'Packaging Design',
+                description: 'Sustainable packaging system for an organic skincare line that balanced eco-friendly materials with premium visual appeal to stand out in competitive retail environments.',
+                images: [
+                    { src: 'https://source.unsplash.com/random/800x600/?skincare,packaging', caption: 'Primary packaging suite' },
+                    { src: 'https://source.unsplash.com/random/800x600/?eco,packaging', caption: 'Material close-up' },
+                    { src: 'https://source.unsplash.com/random/800x600/?label,design', caption: 'Label detail' },
+                    { src: 'https://source.unsplash.com/random/800x600/?shelf,display', caption: 'Retail shelf mockup' },
+                    { src: 'https://source.unsplash.com/random/800x600/?unboxing,experience', caption: 'Unboxing experience' },
+                    { src: 'https://source.unsplash.com/random/800x600/?pattern,design', caption: 'Custom pattern design' }
+                ],
+                details: [
+                    { icon: 'fas fa-user-tie', title: 'Client', value: 'Pure Elements Skincare' },
+                    { icon: 'fas fa-calendar-alt', title: 'Year', value: '2023' },
+                    { icon: 'fas fa-tags', title: 'Category', value: 'Packaging Design' },
+                    { icon: 'fas fa-clock', title: 'Duration', value: '8 weeks' },
+                    { icon: 'fas fa-palette', title: 'Tools', value: 'Illustrator, Dimension, C4D' }
+                ],
+                testimonial: {
+                    text: '"The packaging design exceeded our expectations in both sustainability and visual appeal. It helped us achieve a 40% increase in shelf conversion compared to our previous packaging."',
+                    name: 'Emma Rodriguez',
+                    position: 'Founder, Pure Elements'
+                },
+                related: [
+                    { id: '1', title: 'Brand Identity', image: 'https://source.unsplash.com/random/600x400/?logo,design', category: 'Branding' },
+                    { id: '4', title: 'Digital Illustration', image: 'https://source.unsplash.com/random/600x400/?illustration,digital', category: 'Illustration' },
+                    { id: '6', title: 'Editorial Design', image: 'https://source.unsplash.com/random/600x400/?magazine,layout', category: 'Publication Design' }
+                ]
+            },
+            '4': {
+                title: 'Digital Illustration',
+                category: 'Illustration',
+                description: 'Series of futuristic cyberpunk character designs for a video game studio, blending traditional drawing techniques with digital painting to create immersive world-building assets.',
+                images: [
+                    { src: 'https://source.unsplash.com/random/800x600/?cyberpunk,character', caption: 'Main protagonist design' },
+                    { src: 'https://source.unsplash.com/random/800x600/?sci-fi,illustration', caption: 'Villain character' },
+                    { src: 'https://source.unsplash.com/random/800x600/?concept,art', caption: 'Side character' },
+                    { src: 'https://source.unsplash.com/random/800x600/?cyber,armor', caption: 'Armor detail' },
+                    { src: 'https://source.unsplash.com/random/800x600/?weapon,design', caption: 'Weapon designs' },
+                    { src: 'https://source.unsplash.com/random/800x600/?character,sheet', caption: 'Character turnarounds' }
+                ],
+                details: [
+                    { icon: 'fas fa-user-tie', title: 'Client', value: 'Neon Future Games' },
+                    { icon: 'fas fa-calendar-alt', title: 'Year', value: '2022' },
+                    { icon: 'fas fa-tags', title: 'Category', value: 'Digital Illustration' },
+                    { icon: 'fas fa-clock', title: 'Duration', value: '12 weeks' },
+                    { icon: 'fas fa-palette', title: 'Tools', value: 'Procreate, Photoshop, Blender' }
+                ],
+                testimonial: {
+                    text: '"The artist\'s ability to translate our vague concepts into fully-realized characters was incredible. Their designs became central to our game\'s visual identity and marketing."',
+                    name: 'David Kim',
+                    position: 'Art Director, Neon Future'
+                },
+                related: [
+                    { id: '2', title: 'Event Poster', image: 'https://source.unsplash.com/random/600x400/?poster,design', category: 'Print Design' },
+                    { id: '3', title: 'Product Packaging', image: 'https://source.unsplash.com/random/600x400/?packaging,design', category: 'Packaging' },
+                    { id: '5', title: 'Book Cover', image: 'https://source.unsplash.com/random/600x400/?book,cover', category: 'Publication Design' }
+                ]
+            },
+            '5': {
+                title: 'Book Cover',
+                category: 'Publication Design',
+                description: 'Minimalist cover design for a bestselling novel that captured the essence of the story through subtle symbolism and sophisticated typography.',
+                images: [
+                    { src: 'https://source.unsplash.com/random/800x600/?book,cover,minimal', caption: 'Front cover design' },
+                    { src: 'https://source.unsplash.com/random/800x600/?book,spine', caption: 'Spine detail' },
+                    { src: 'https://source.unsplash.com/random/800x600/?book,back', caption: 'Back cover design' },
+                    { src: 'https://source.unsplash.com/random/800x600/?book,texture', caption: 'Material texture' },
+                    { src: 'https://source.unsplash.com/random/800x600/?book,display', caption: 'Retail display' },
+                    { src: 'https://source.unsplash.com/random/800x600/?book,details', caption: 'Cover details' }
+                ],
+                details: [
+                    { icon: 'fas fa-user-tie', title: 'Client', value: 'Horizon Publishing' },
+                    { icon: 'fas fa-calendar-alt', title: 'Year', value: '2023' },
+                    { icon: 'fas fa-tags', title: 'Category', value: 'Publication Design' },
+                    { icon: 'fas fa-clock', title: 'Duration', value: '4 weeks' },
+                    { icon: 'fas fa-palette', title: 'Tools', value: 'InDesign, Photoshop, Illustrator' }
+                ],
+                testimonial: {
+                    text: '"The cover design perfectly captured the tone of our novel while standing out in a crowded marketplace. We saw a noticeable increase in bookstore pickups after the redesign."',
+                    name: 'Lisa Wong',
+                    position: 'Creative Director, Horizon'
+                },
+                related: [
+                    { id: '2', title: 'Event Poster', image: 'https://source.unsplash.com/random/600x400/?poster,design', category: 'Print Design' },
+                    { id: '4', title: 'Digital Illustration', image: 'https://source.unsplash.com/random/600x400/?illustration,digital', category: 'Illustration' },
+                    { id: '6', title: 'Editorial Design', image: 'https://source.unsplash.com/random/600x400/?magazine,layout', category: 'Publication Design' }
+                ]
+            },
+            '6': {
+                title: 'Editorial Design',
+                category: 'Publication Design',
+                description: 'Layout and typography system for a contemporary art magazine that balanced readability with artistic expression across diverse content types.',
+                images: [
+                    { src: 'https://source.unsplash.com/random/800x600/?magazine,cover', caption: 'Cover design' },
+                    { src: 'https://source.unsplash.com/random/800x600/?magazine,spread', caption: 'Feature spread' },
+                    { src: 'https://source.unsplash.com/random/800x600/?typography,layout', caption: 'Typography system' },
+                    { src: 'https://source.unsplash.com/random/800x600/?grid,design', caption: 'Grid structure' },
+                    { src: 'https://source.unsplash.com/random/800x600/?photo,essay', caption: 'Photo essay layout' },
+                    { src: 'https://source.unsplash.com/random/800x600/?contents,page', caption: 'Contents page' }
+                ],
+                details: [
+                    { icon: 'fas fa-user-tie', title: 'Client', value: 'ArtNow Magazine' },
+                    { icon: 'fas fa-calendar-alt', title: 'Year', value: '2022' },
+                    { icon: 'fas fa-tags', title: 'Category', value: 'Editorial Design' },
+                    { icon: 'fas fa-clock', title: 'Duration', value: '10 weeks' },
+                    { icon: 'fas fa-palette', title: 'Tools', value: 'InDesign, Illustrator, Photoshop' }
+                ],
+                testimonial: {
+                    text: '"The designer created a flexible system that allowed our diverse content to shine while maintaining strong visual coherence. Readers immediately noticed and appreciated the upgrade."',
+                    name: 'Thomas Reed',
+                    position: 'Editor-in-Chief, ArtNow'
+                },
+                related: [
+                    { id: '1', title: 'Brand Identity', image: 'https://source.unsplash.com/random/600x400/?logo,design', category: 'Branding' },
+                    { id: '3', title: 'Product Packaging', image: 'https://source.unsplash.com/random/600x400/?packaging,design', category: 'Packaging' },
+                    { id: '5', title: 'Book Cover', image: 'https://source.unsplash.com/random/600x400/?book,cover', category: 'Publication Design' }
+                ]
+            }
+        };
+
+        // Load project data
+        const project = projects[projectId] || projects['1'];
+        
+        // Set page title
+        document.title = `${project.title} | WAXXES ANIMATION`;
+        
+        // Update project header
+        document.getElementById('project-title').innerHTML = `<span class="text-white">${project.title}</span>`;
+        document.getElementById('project-category').textContent = project.category;
+        document.getElementById('project-description').textContent = project.description;
+        
+        // Populate gallery
+        const galleryGrid = document.getElementById('gallery-grid');
+        project.images.forEach((image, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item overflow-hidden rounded-xl';
+            galleryItem.innerHTML = `
+                <img src="${image.src}" alt="${image.caption}" class="w-full h-80 object-cover" onclick="openLightbox(${index})">
+            `;
+            galleryGrid.appendChild(galleryItem);
+        });
+        
+        // Populate project details
+        const projectDetails = document.getElementById('project-details');
+        project.details.forEach(detail => {
+            const detailItem = document.createElement('div');
+            detailItem.className = 'flex items-start';
+            detailItem.innerHTML = `
+                <div class="flex-shrink-0 bg-gray-800 p-3 rounded-lg">
+                    <i class="${detail.icon} text-dark-orange text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <h4 class="text-lg font-semibold text-white">${detail.title}</h4>
+                    <p class="text-gray-400">${detail.value}</p>
+                </div>
+            `;
+            projectDetails.appendChild(detailItem);
+        });
+        
+        // Populate testimonial
+        document.getElementById('testimonial-text').textContent = project.testimonial.text;
+        document.getElementById('client-name').textContent = project.testimonial.name;
+        document.getElementById('client-position').textContent = project.testimonial.position;
+        
+        // Populate related projects
+        const relatedProjects = document.getElementById('related-projects');
+        project.related.forEach(related => {
+            const relatedItem = document.createElement('div');
+            relatedItem.className = 'project-card relative overflow-hidden rounded-xl group';
+            relatedItem.innerHTML = `
+                <img src="${related.image}" alt="${related.title}" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-2xl font-bold text-white mb-2">${related.title}</h3>
+                    <p class="text-gray-300 mb-4">${related.category}</p>
+                    <a href="gallery.html?project=${related.id}" class="btn-hover-effect bg-neon-blue text-black font-bold py-2 px-6 rounded-full inline-flex items-center justify-center w-max">
+                        View Project <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            `;
+            relatedProjects.appendChild(relatedItem);
+        });
+
+        // Lightbox functionality
+        let currentImageIndex = 0;
+        
+        window.openLightbox = function(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightbox.style.display = 'block';
+            lightboxImg.src = project.images[index].src;
+            lightboxCaption.textContent = project.images[index].caption;
+        }
+        
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('lightbox').style.display = 'none';
+        });
+        
+        document.querySelector('.next').addEventListener('click', function() {
+            currentImageIndex = (currentImageIndex + 1) % project.images.length;
+            updateLightbox();
+        });
+        
+        document.querySelector('.prev').addEventListener('click', function() {
+            currentImageIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
+            updateLightbox();
+        });
+        
+        function updateLightbox() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImg.src = project.images[currentImageIndex].src;
+            lightboxCaption.textContent = project.images[currentImageIndex].caption;
+        }
+        
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Add shadow to navbar on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>

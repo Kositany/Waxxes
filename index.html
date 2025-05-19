@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAXXES ANIMATION</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-blue': '#00f7ff',
+                        'dark-orange': '#ff5e00',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'wave': 'wave 1.5s linear infinite',
+                        'ripple': 'ripple 1.2s ease-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        wave: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '10%': { transform: 'rotate(14deg)' },
+                            '20%': { transform: 'rotate(-8deg)' },
+                            '30%': { transform: 'rotate(14deg)' },
+                            '40%': { transform: 'rotate(-4deg)' },
+                            '50%': { transform: 'rotate(10deg)' },
+                            '60%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(0deg)' },
+                        },
+                        ripple: {
+                            '0%': { transform: 'scale(0.8)', opacity: '1' },
+                            '100%': { transform: 'scale(2.4)', opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="gradient-bg">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold neon-text">WAXXES<span class="text-orange-500">...</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#home" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#work" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">Work</a>
+                        <a href="#videos" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">Videos</a>
+                        <a href="#about" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">About</a>
+                        <a href="#contact" class="nav-link text-white hover:text-neon-blue px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white hover:text-neon-blue focus:outline-none">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-black bg-opacity-95" style="text-align: center; height: 100vh;">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">Home</a>
+                <a href="#work" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">Work</a>
+                <a href="#videos" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">Videos</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">About</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-white hover:text-neon-blue">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+                <span class="text-white">Waxxes</span> <span class="text-neon-blue">Animation</span> <span class="text-orange-500">Studio</span>
+            </h1>
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                Transforming ideas into visually stunning experiences. Specializing in branding, digital art, and innovative design solutions.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#work" class="btn-hover-effect bg-neon-blue text-black font-bold py-3 px-8 rounded-full inline-flex items-center justify-center">
+                    View Portfolio
+                </a>
+                <a href="#videos" class="btn-hover-effect border-2 border-neon-blue text-neon-blue font-bold py-3 px-8 rounded-full inline-flex items-center justify-center">
+                    Watch Showreel
+                </a>
+            </div>
+            <div class="mt-20 scroll-down">
+                <a href="#work" class="text-gray-400 hover:text-neon-blue">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid Section -->
+    <section id="work" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <span class="text-white">Selected</span> <span class="text-neon-blue">Works</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    A curated selection of my latest design projects. Each piece tells a unique story of creativity and problem-solving.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card relative overflow-hidden rounded-xl group">
+                    <img src="https://source.unsplash.com/random/600x600/?graphic-design,1" alt="Project 1" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="project-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Brand Identity</h3>
+                        <p class="text-gray-300 mb-4">Modern logo design and brand guidelines for a tech startup</p>
+                        <a href="gallery.html?project=1" class="btn-hover-effect bg-neon-blue text-black font-bold py-2 px-6 rounded-full inline-flex items-center justify-center w-max">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card relative overflow-hidden rounded-xl group">
+                    <img src="https://source.unsplash.com/random/600x600/?poster,design" alt="Project 2" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="project-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Event Poster</h3>
+                        <p class="text-gray-300 mb-4">Vibrant music festival poster with custom typography</p>
+                        <a href="gallery.html?project=2" class="btn-hover-effect bg-neon-blue text-black font-bold py-2 px-6 rounded-full inline-flex items-center justify-center w-max">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card relative overflow-hidden rounded-xl group">
+                    <img src="https://source.unsplash.com/random/600x600/?packaging,design" alt="Project 3" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="project-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Product Packaging</h3>
+                        <p class="text-gray-300 mb-4">Sustainable packaging design for organic skincare line</p>
+                        <a href="gallery.html?project=3" class="btn-hover-effect bg-neon-blue text-black font-bold py-2 px-6 rounded-full inline-flex items-center justify-center w-max">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card relative overflow-hidden rounded-xl group">
+                    <img src="https://source.unsplash.com/random/600x600/?illustration,digital" alt="Project 4" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="project-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Digital Illustration</h3>
+                        <p class="text-gray-300 mb-4">Series of futuristic cyberpunk character designs</p>
+                        <a href="gallery.html?project=4" class="btn-hover-effect bg-neon-blue text-black font-bold py-2 px-6 rounded-full inline-flex items-center justify-center w-max">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project-card relative overflow-hidden rounded-xl group">
+                    <img src="https://source.unsplash.com/random/600x600/?book,cover" alt="Project 5" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="project-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Book Cover</h3>
+                        <p class="text-gray-300 mb-4">Minimalist cover design for a bestselling novel</p>
+                        <a href="gallery.html?project=5" class="btn-hover-effect bg-neon-blue text-black font-bold py-2 px-6 rounded-full inline-flex items-center justify-center w-max">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card relative overflow-hidden rounded-xl group">
+                    <img src="https://source.unsplash.com/random/600x600/?editorial,design" alt="Project 6" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="project-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Editorial Design</h3>
+                        <p class="text-gray-300 mb-4">Layout and typography for a contemporary art magazine</p>
+                        <a href="gallery.html?project=6" class="btn-hover-effect bg-neon-blue text-black font-bold py-2 px-6 rounded-full inline-flex items-center justify-center w-max">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="gallery.html" class="btn-hover-effect border-2 border-neon-blue text-neon-blue font-bold py-3 px-8 rounded-full inline-flex items-center justify-center">
+                    View All Projects <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Showcase Section -->
+    <section id="videos" class="py-20 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-50 relative overflow-hidden">
+        <div class="video-wave"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <span class="text-white">Video</span> <span class="text-neon-blue">Showcase</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Explore our animation portfolio through these captivating video samples and client projects.
+                </p>
+            </div>
+
+            <!-- Featured Video -->
+            <div class="mb-20">
+                <h3 class="text-2xl font-bold text-neon-blue mb-6 flex items-center">
+                    <i class="fas fa-star mr-3 animate-pulse"></i> Featured Showreel
+                </h3>
+                <div class="video-container rounded-xl overflow-hidden">
+                    <video class="w-full" id="featured-video" poster="https://source.unsplash.com/random/1200x675/?animation,studio">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay" id="featured-overlay">
+                        <div class="text-center mb-8">
+                            <h3 class="text-3xl font-bold text-white mb-2">Waxxes Studio Showreel 2023</h3>
+                            <p class="text-gray-300 max-w-2xl mx-auto">A compilation of our best animation work from the past year</p>
+                        </div>
+                        <button class="play-button" id="featured-play">
+                            <i class="fas fa-play text-2xl"></i>
+                        </button>
+                    </div>
+                    <div class="video-controls">
+                        <button class="control-button play-pause" id="featured-play-pause">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <div class="progress-bar" id="featured-progress">
+                            <div class="progress-filled" id="featured-progress-filled"></div>
+                        </div>
+                        <span class="time-display" id="featured-time">0:00 / 0:00</span>
+                        <button class="control-button volume-btn" id="featured-volume">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <div class="volume-control volume-container">
+                            <input type="range" class="volume-slider" id="featured-volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <button class="control-button fullscreen-btn" id="featured-fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Grid -->
+            <h3 class="text-2xl font-bold text-neon-blue mb-6 flex items-center">
+                <i class="fas fa-film mr-3"></i> Recent Projects
+            </h3>
+            <div class="video-grid">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-container aspect-video">
+                        <video class="w-full" poster="https://source.unsplash.com/random/600x338/?animation,1">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <button class="play-button">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-tag">2D Animation</span>
+                        <h4 class="text-xl font-bold text-white">Character Design Series</h4>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card">
+                    <div class="video-container aspect-video">
+                        <video class="w-full" poster="https://source.unsplash.com/random/600x338/?animation,2">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <button class="play-button">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-tag">Motion Graphics</span>
+                        <h4 class="text-xl font-bold text-white">Tech Company Explainer</h4>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card">
+                    <div class="video-container aspect-video">
+                        <video class="w-full" poster="https://source.unsplash.com/random/600x338/?animation,3">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <button class="play-button">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-tag">3D Animation</span>
+                        <h4 class="text-xl font-bold text-white">Product Visualization</h4>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="video-card">
+                    <div class="video-container aspect-video">
+                        <video class="w-full" poster="https://source.unsplash.com/random/600x338/?animation,4">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <button class="play-button">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-tag">Mixed Media</span>
+                        <h4 class="text-xl font-bold text-white">Music Video Project</h4>
+                    </div>
+                </div>
+
+                <!-- Video 5 -->
+                <div class="video-card">
+                    <div class="video-container aspect-video">
+                        <video class="w-full" poster="https://source.unsplash.com/random/600x338/?animation,5">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <button class="play-button">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-tag">Stop Motion</span>
+                        <h4 class="text-xl font-bold text-white">Claymation Short Film</h4>
+                    </div>
+                </div>
+
+                <!-- Video 6 -->
+                <div class="video-card">
+                    <div class="video-container aspect-video">
+                        <video class="w-full" poster="https://source.unsplash.com/random/600x338/?animation,6">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <button class="play-button">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-tag">Visual Effects</span>
+                        <h4 class="text-xl font-bold text-white">Sci-Fi Sequence</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Modal -->
+            <div class="video-modal" id="video-modal">
+                <div class="modal-content">
+                    <button class="close-modal" id="close-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <video class="w-full" controls id="modal-video">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <img src="https://source.unsplash.com/random/600x600/?designer" alt="Designer" class="w-full rounded-xl shadow-2xl border-2 border-neon-blue">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                        <span class="text-white">About</span> <span class="text-neon-blue">Me</span>
+                    </h2>
+                    <p class="text-gray-300 mb-6">
+                        I'm a passionate graphic designer with over 8 years of experience creating memorable visual identities and compelling designs. My approach combines strategic thinking with artistic expression to deliver solutions that resonate with audiences.
+                    </p>
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-neon-blue mb-4">My Skills</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-dark-orange mr-2"></i>
+                                <span>Brand Identity</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-dark-orange mr-2"></i>
+                                <span>Typography</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-dark-orange mr-2"></i>
+                                <span>Illustration</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-dark-orange mr-2"></i>
+                                <span>Packaging Design</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-dark-orange mr-2"></i>
+                                <span>Art Direction</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-dark-orange mr-2"></i>
+                                <span>UI/UX Design</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" class="btn-hover-effect bg-neon-blue text-black font-bold py-3 px-6 rounded-full inline-flex items-center justify-center">
+                            Download CV <i class="fas fa-download ml-2"></i>
+                        </a>
+                        <a href="#contact" class="btn-hover-effect border-2 border-neon-blue text-neon-blue font-bold py-3 px-6 rounded-full inline-flex items-center justify-center">
+                            Let's Talk <i class="fas fa-comment ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <span class="text-white">Get In</span> <span class="text-neon-blue">Touch</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Have a project in mind or want to discuss potential collaboration? I'd love to hear from you.
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-neon-blue focus:border-neon-blue outline-none text-white">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-neon-blue focus:border-neon-blue outline-none text-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-neon-blue focus:border-neon-blue outline-none text-white">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-neon-blue focus:border-neon-blue outline-none text-white"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn-hover-effect bg-neon-blue text-black font-bold py-3 px-8 rounded-full w-full">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl h-full">
+                        <h3 class="text-2xl font-bold text-neon-blue mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-gray-800 p-3 rounded-lg">
+                                    <i class="fas fa-map-marker-alt text-dark-orange text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-white">Location</h4>
+                                    <p class="text-gray-400">Kahawa Sukari, Nairobi, Kenya</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-gray-800 p-3 rounded-lg">
+                                    <i class="fas fa-envelope text-dark-orange text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-white">Email</h4>
+                                    <p class="text-gray-400">waxxesanimation@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-gray-800 p-3 rounded-lg">
+                                    <i class="fas fa-phone-alt text-dark-orange text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-white">Phone</h4>
+                                    <p class="text-gray-400">+254 7123 456 222</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-12">
+                            <h4 class="text-lg font-semibold text-white mb-4">Follow Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="btn-hover-effect bg-gray-800 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fab fa-behance"></i>
+                                </a>
+                                <a href="#" class="btn-hover-effect bg-gray-800 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fab fa-dribbble"></i>
+                                </a>
+                                <a href="#" class="btn-hover-effect bg-gray-800 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="btn-hover-effect bg-gray-800 text-white p-3 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-90 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold neon-text">WAXXES<span class="text-orange-500">...</span></span>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <p class="text-gray-400 mb-4 text-center md:text-right">
+                        © 2023 Waxxes Animation Studio. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-neon-blue">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-neon-blue">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-neon-blue">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-neon-blue">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <css-doodle class="doodle">
+        @grid: 2 / 100vmax / #352c3d;
+        --hue: calc(180 + 1.5 * @x * @y);
+        background: hsl(var(--hue), 50%, 70%, 1.2);
+        margin: -.5px;
+        transition: @r(300ms) ease;
+        clip-path: polygon(@pick(
+        '0 0, 100% 0, 100% 100%',
+        '0 0, 100% 0, 0 100%',
+        '0 0, 100% 100%, 0 100%',
+        '100% 0, 100% 100%, 0 100%'
+        ));
+    </css-doodle>
+    <script src="https://unpkg.com/css-doodle@0.36.0/css-doodle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
